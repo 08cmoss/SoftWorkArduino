@@ -28,7 +28,7 @@ BLEService ledService("19B10000-E8F2-537E-4F6C-D104768A1214"); // BLE LED Servic
 BLEUnsignedCharCharacteristic servoCharacteristic("19B10002-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
 
 const int pin1 = 10; // pin to use for the LED
-const int pin2 = 12;
+//const int pin2 = 12;
 const int pin3 = 11;
 int servoPin = 3;
 
@@ -38,7 +38,7 @@ void setup() {
 
   // set LED pin to output mode
   pinMode(pin1, OUTPUT);
-  pinMode(pin2, OUTPUT);
+  //pinMode(pin2, OUTPUT);
   pinMode(pin3, OUTPUT);
 
   // set advertised local name and service UUID:
@@ -90,12 +90,12 @@ void loop() {
       } else if (servoCharacteristic.value() == 33) {
         digitalWrite(pin1, HIGH);
       } 
-      if(servoCharacteristic.value() == 4) {
-        Serial.println("Light1 on");
-        digitalWrite(pin2, LOW);
-      } else if (servoCharacteristic.value() == 44) {
-        digitalWrite(pin2, HIGH);
-      } 
+//      if(servoCharacteristic.value() == 4) {
+//        Serial.println("Light1 on");
+//        digitalWrite(pin2, LOW);
+//      } else if (servoCharacteristic.value() == 44) {
+//        digitalWrite(pin2, HIGH);
+//      } 
       if(servoCharacteristic.value() == 5) {
         Serial.println("Light2 on");
         digitalWrite(pin3, LOW);
