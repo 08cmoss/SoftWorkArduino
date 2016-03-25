@@ -24,7 +24,7 @@ BLEPeripheral blePeripheral;  // BLE Peripheral Device (the board you're program
 BLEService ledService("19B10000-E8F2-537E-4F6C-D104768A1214"); // BLE LED Service
 
 // BLE LED Switch Characteristic - custom 128-bit UUID, read and writable by central
-BLEUnsignedCharCharacteristic switchCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
+//BLEUnsignedCharCharacteristic switchCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
 BLEUnsignedCharCharacteristic servoCharacteristic("19B10002-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
 
 const int ledPin = 13; // pin to use for the LED
@@ -47,12 +47,12 @@ void setup() {
 
   // add service and characteristic:
   blePeripheral.addAttribute(ledService);
-  blePeripheral.addAttribute(switchCharacteristic);
+  //blePeripheral.addAttribute(switchCharacteristic);
   blePeripheral.addAttribute(servoCharacteristic);
 
   // set the initial value for the characeristic:
-  switchCharacteristic.setValue(0);
-  servoCharacteristic.setValue(0);
+
+  servoCharacteristic.setValue(2);
 
   // begin advertising BLE service:
   blePeripheral.begin();
@@ -75,43 +75,32 @@ void loop() {
       //Servo1.write(20);                //will turn the servo to 20 degrees initially
       // if the remote device wrote to the characteristic,
       // use the value to control the LED:
-      if (switchCharacteristic.written()) {
-        if (switchCharacteristic.value() == 3) {   // any value other than 0
-          Serial.println("TV on");
-          digitalWrite(ledPin, HIGH);         // will turn the LED on
-                            
-        } else {                              // a 0 value
-          Serial.println(F("TV off"));
-          digitalWrite(ledPin, LOW);          // will turn the LED off
-        }
-//        if(switchCharacteristic.value() == 1) {
-//          Serial.println("Lights on");
-//          digitalWrite(ledPin, HIGH);
-//        } else {
-//          Serial.println(F("Lights off"));
-//          digitalWrite(ledPin, LOW);
-//        }
-      }
+
      if(servoCharacteristic.written()) {
+      
       if(servoCharacteristic.value() == 2) {
         Serial.println("Servo 180");      //will turn the servo 180 degrees
         Servo1.write(180);
-      } else if(servoCharacteristic.value() == 3) {
+      } else if (servoCharacteristic.value() == 22) {
+        Servo1.write(20);
+      } 
+      if(servoCharacteristic.value() == 3) {
         Serial.println("TV on");
         digitalWrite(ledPin, HIGH);
-      } else if(servoCharacteristic.value() == 4) {
+      } else if (servoCharacteristic.value() == 33) {
+        digitalWrite(ledPin, LOW);
+      } 
+      if(servoCharacteristic.value() == 4) {
         Serial.println("Light1 on");
         digitalWrite(pin2, HIGH);
-      } else if(servoCharacteristic.value() == 5) {
+      } else if (servoCharacteristic.value() == 44) {
+        digitalWrite(pin2, LOW);
+      } 
+      if(servoCharacteristic.value() == 5) {
         Serial.println("Light2 on");
         digitalWrite(pin3, HIGH);
-      }
-      else {
-        digitalWrite(pin2, LOW);
+      } else if (servoCharacteristic.value() == 55) {
         digitalWrite(pin3, LOW);
-        digitalWrite(ledPin, LOW);
-        Serial.println("Servo 20");
-        Servo1.write(20);
       }
      }
     }
