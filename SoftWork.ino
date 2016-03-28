@@ -81,51 +81,51 @@ void loop() {
      if(switchCharacteristic.written()) {
       if(switchCharacteristic.value() == 1) {
         Serial.println("Channel1 on");
-        digitalWrite(pin1, LOW);
-      } else if (switchCharacteristic.value() == 11) {
         digitalWrite(pin1, HIGH);
+      } else if (switchCharacteristic.value() == 11) {
+        digitalWrite(pin1, LOW);
       } 
       if(switchCharacteristic.value() == 2) {
         Serial.println("Channel2 on");
-        digitalWrite(pin2, LOW);
-      } else if (switchCharacteristic.value() == 22) {
         digitalWrite(pin2, HIGH);
+      } else if (switchCharacteristic.value() == 22) {
+        digitalWrite(pin2, LOW);
       } 
       if(switchCharacteristic.value() == 3) {
         Serial.println("Channel3 on");
-        digitalWrite(pin3, LOW);
-      } else if (switchCharacteristic.value() == 33) {
         digitalWrite(pin3, HIGH);
+      } else if (switchCharacteristic.value() == 33) {
+        digitalWrite(pin3, LOW);
       }
        if(switchCharacteristic.value() == 4) {
         Serial.println("Channel4 on");
-        digitalWrite(pin4, LOW);
-      } else if (switchCharacteristic.value() == 44) {
         digitalWrite(pin4, HIGH);
+      } else if (switchCharacteristic.value() == 44) {
+        digitalWrite(pin4, LOW);
       }
        if(switchCharacteristic.value() == 5) {
         Serial.println("Channel5 on");
-        digitalWrite(pin5, LOW);
-      } else if (switchCharacteristic.value() == 55) {
         digitalWrite(pin5, HIGH);
+      } else if (switchCharacteristic.value() == 55) {
+        digitalWrite(pin5, LOW);
       }
        if(switchCharacteristic.value() == 6) {
         Serial.println("Channel6 on");
-        digitalWrite(pin6, LOW);
-      } else if (switchCharacteristic.value() == 66) {
         digitalWrite(pin6, HIGH);
+      } else if (switchCharacteristic.value() == 66) {
+        digitalWrite(pin6, LOW);
       }
        if(switchCharacteristic.value() == 7) {
         Serial.println("Channel7 on");
-        digitalWrite(pin7, LOW);
-      } else if (switchCharacteristic.value() == 77) {
         digitalWrite(pin7, HIGH);
+      } else if (switchCharacteristic.value() == 77) {
+        digitalWrite(pin7, LOW);
       }
        if(switchCharacteristic.value() == 8) {
         Serial.println("Channel8 on");
-        digitalWrite(pin8, LOW);
-      } else if (switchCharacteristic.value() == 88) {
         digitalWrite(pin8, HIGH);
+      } else if (switchCharacteristic.value() == 88) {
+        digitalWrite(pin8, LOW);
       }     
      }
     }
