@@ -16,43 +16,46 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include <CurieBle.h>
-#include <Servo.h>
-
-Servo Servo1;
 
 BLEPeripheral blePeripheral;  // BLE Peripheral Device (the board you're programming)
 BLEService ledService("19B10000-E8F2-537E-4F6C-D104768A1214"); // BLE LED Service
 
 // BLE LED Switch Characteristic - custom 128-bit UUID, read and writable by central
-//BLEUnsignedCharCharacteristic switchCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
-BLEUnsignedCharCharacteristic servoCharacteristic("19B10002-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
+BLEUnsignedCharCharacteristic switchCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
 
-const int pin1 = 10; // pin to use for the LED
-//const int pin2 = 12;
-const int pin3 = 11;
-int servoPin = 3;
+const int pin1 = 2; // pin to use for the LED
+const int pin2 = 3;
+const int pin3 = 4;
+const int pin4 = 5;
+const int pin5 = 6;
+const int pin6 = 7;
+const int pin7 = 8;
+const int pin8 = 9;
 
 void setup() {
   Serial.begin(9600);
-  Servo1.attach(servoPin);
 
   // set LED pin to output mode
   pinMode(pin1, OUTPUT);
-  //pinMode(pin2, OUTPUT);
+  pinMode(pin2, OUTPUT);
   pinMode(pin3, OUTPUT);
+  pinMode(pin4, OUTPUT);
+  pinMode(pin5, OUTPUT);
+  pinMode(pin6, OUTPUT);
+  pinMode(pin7, OUTPUT);
+  pinMode(pin8, OUTPUT);
 
   // set advertised local name and service UUID:
-  blePeripheral.setLocalName("LED");
+  blePeripheral.setLocalName("Switches");
   blePeripheral.setAdvertisedServiceUuid(ledService.uuid());
 
   // add service and characteristic:
   blePeripheral.addAttribute(ledService);
-  //blePeripheral.addAttribute(switchCharacteristic);
-  blePeripheral.addAttribute(servoCharacteristic);
+  blePeripheral.addAttribute(switchCharacteristic);
 
   // set the initial value for the characeristic:
 
-  servoCharacteristic.setValue(2);
+  switchCharacteristic.setValue(0);
 
   // begin advertising BLE service:
   blePeripheral.begin();
@@ -72,36 +75,58 @@ void loop() {
 
     // while the central is still connected to peripheral:
     while (central.connected()) {
-      //Servo1.write(20);                //will turn the servo to 20 degrees initially
       // if the remote device wrote to the characteristic,
       // use the value to control the LED:
 
-     if(servoCharacteristic.written()) {
-      
-      if(servoCharacteristic.value() == 2) {
-        Serial.println("Servo 180");      //will turn the servo 180 degrees
-        Servo1.write(180);
-      } else if (servoCharacteristic.value() == 22) {
-        Servo1.write(20);
-      } 
-      if(servoCharacteristic.value() == 3) {
-        Serial.println("TV on");
+     if(switchCharacteristic.written()) {
+      if(switchCharacteristic.value() == 1) {
+        Serial.println("Channel1 on");
         digitalWrite(pin1, LOW);
-      } else if (servoCharacteristic.value() == 33) {
+      } else if (switchCharacteristic.value() == 11) {
         digitalWrite(pin1, HIGH);
       } 
-//      if(servoCharacteristic.value() == 4) {
-//        Serial.println("Light1 on");
-//        digitalWrite(pin2, LOW);
-//      } else if (servoCharacteristic.value() == 44) {
-//        digitalWrite(pin2, HIGH);
-//      } 
-      if(servoCharacteristic.value() == 5) {
-        Serial.println("Light2 on");
+      if(switchCharacteristic.value() == 2) {
+        Serial.println("Channel2 on");
+        digitalWrite(pin2, LOW);
+      } else if (switchCharacteristic.value() == 22) {
+        digitalWrite(pin2, HIGH);
+      } 
+      if(switchCharacteristic.value() == 3) {
+        Serial.println("Channel3 on");
         digitalWrite(pin3, LOW);
-      } else if (servoCharacteristic.value() == 55) {
+      } else if (switchCharacteristic.value() == 33) {
         digitalWrite(pin3, HIGH);
       }
+       if(switchCharacteristic.value() == 4) {
+        Serial.println("Channel4 on");
+        digitalWrite(pin4, LOW);
+      } else if (switchCharacteristic.value() == 44) {
+        digitalWrite(pin4, HIGH);
+      }
+       if(switchCharacteristic.value() == 5) {
+        Serial.println("Channel5 on");
+        digitalWrite(pin5, LOW);
+      } else if (switchCharacteristic.value() == 55) {
+        digitalWrite(pin5, HIGH);
+      }
+       if(switchCharacteristic.value() == 6) {
+        Serial.println("Channel6 on");
+        digitalWrite(pin6, LOW);
+      } else if (switchCharacteristic.value() == 66) {
+        digitalWrite(pin6, HIGH);
+      }
+       if(switchCharacteristic.value() == 7) {
+        Serial.println("Channel7 on");
+        digitalWrite(pin7, LOW);
+      } else if (switchCharacteristic.value() == 77) {
+        digitalWrite(pin7, HIGH);
+      }
+       if(switchCharacteristic.value() == 8) {
+        Serial.println("Channel8 on");
+        digitalWrite(pin8, LOW);
+      } else if (switchCharacteristic.value() == 88) {
+        digitalWrite(pin8, HIGH);
+      }     
      }
     }
 
