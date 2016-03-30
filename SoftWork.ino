@@ -16,6 +16,9 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include <CurieBle.h>
+#include <Servo.h>
+
+Servo Servo1;
 
 BLEPeripheral blePeripheral;  // BLE Peripheral Device (the board you're programming)
 BLEService ledService("19B10000-E8F2-537E-4F6C-D104768A1214"); // BLE LED Service
@@ -34,12 +37,13 @@ const int pin8 = 9;
 
 void setup() {
   Serial.begin(9600);
-
+  Servo1.attach(pin4);
   // set LED pin to output mode
   pinMode(pin1, OUTPUT);
   pinMode(pin2, OUTPUT);
   pinMode(pin3, OUTPUT);
-  pinMode(pin4, OUTPUT);
+  
+  //pinMode(pin4, OUTPUT);
   pinMode(pin5, OUTPUT);
   pinMode(pin6, OUTPUT);
   pinMode(pin7, OUTPUT);
@@ -99,9 +103,11 @@ void loop() {
       }
        if(switchCharacteristic.value() == 4) {
         Serial.println("Channel4 on");
-        digitalWrite(pin4, HIGH);
+        Servo1.write(180);
+        //digitalWrite(pin4, HIGH);
       } else if (switchCharacteristic.value() == 44) {
-        digitalWrite(pin4, LOW);
+        Servo1.write(20);
+        //digitalWrite(pin4, LOW);
       }
        if(switchCharacteristic.value() == 5) {
         Serial.println("Channel5 on");
