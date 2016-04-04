@@ -21,7 +21,7 @@
 Servo Servo1;
 
 BLEPeripheral blePeripheral;  // BLE Peripheral Device (the board you're programming)
-BLEService ledService("19B10000-E8F2-537E-4F6C-D104768A1214"); // BLE LED Service
+BLEService ledService("B5ED2292-88FF-48DC-8107-133692B3E385"); // BLE LED Service
 
 // BLE LED Switch Characteristic - custom 128-bit UUID, read and writable by central
 BLEUnsignedCharCharacteristic switchCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
@@ -34,6 +34,7 @@ const int pin5 = 6;
 const int pin6 = 7;
 const int pin7 = 8;
 const int pin8 = 9;
+
 
 void setup() {
   Serial.begin(9600);
@@ -132,7 +133,7 @@ void loop() {
         digitalWrite(pin8, HIGH);
       } else if (switchCharacteristic.value() == 88) {
         digitalWrite(pin8, LOW);
-      }     
+      }    
      }
     }
 
