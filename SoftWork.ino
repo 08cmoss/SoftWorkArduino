@@ -104,7 +104,7 @@ void loop() {
       }
        if(switchCharacteristic.value() == 4) {
         Serial.println("Channel4 on");
-        Servo1.write(180);
+        Servo1.write(160);
         //digitalWrite(pin4, HIGH);
       } else if (switchCharacteristic.value() == 44) {
         Servo1.write(20);
