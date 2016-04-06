@@ -108,7 +108,7 @@ void loop() {
         Servo1.write(140);
         //digitalWrite(pin4, HIGH);
       } else if (switchCharacteristic.value() == 44) {
-        Servo1.write(20);
+        Servo1.write(10);
         //digitalWrite(pin4, LOW);
       }
        if(switchCharacteristic.value() == 5) {
